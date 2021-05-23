@@ -2,14 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-                <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-                    <link href="style.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+        <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+        <link href="style.css" rel="stylesheet">
                         <!-- Title -->
-                        <title>Portfolio Analysis</title>
-                        </head>
+        <title>Portfolio Analysis</title>
+    </head>
     <body class="bg-black">
-        <!-- This example requires Tailwind CSS v2.0+ -->
         <nav>
             <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
                 <div class="relative flex items-center justify-between h-16">
@@ -78,38 +77,20 @@
                     <!-- Start of market indexes-->
                     <div class="flex flex-nowrap space-x-4 px-4 ">
                         <div class="flex-auto ">
-                            <div class="bg-black border-red-600 dark:bg-gray-800 bg-opacity-95 border-opacity-60 | p-1 border-solid rounded-3xl border-2 | flex justify-around cursor-pointer | hover:bg-red-400 dark:hover:bg-red-600 hover:border-transparent | transition-colors duration-500">
-                                <div class="flex flex-col justify-center">
-                                    <p class="text-base">S&P 500</p>
-                                    <p class="text-xs">4,155.86</p>
-                                    <p class="text-xs">-3.26(-0.08%)</p>
-                                </div>
-                            </div>
+                            <market-index-box name="S&P 500"></market-index-box>
                         </div>
                         <div class="flex-auto ">
-                            <div class="bg-black border-red-600 dark:bg-gray-800 bg-opacity-95 border-opacity-60 | p-1 border-solid rounded-3xl border-2 | flex justify-around cursor-pointer | hover:bg-red-400 dark:hover:bg-red-600 hover:border-transparent | transition-colors duration-500">
-                                
-                                <div class="flex flex-col justify-center">
-                                    <p class="text-base">Dow 30</p>
-                                    <p class="text-xs">34,207.84</p>
-                                    <p class="text-xs">+123.69(+0.36%)</p>
-                                </div>
-                            </div>
+                            <market-index-box name="Dow 30"></market-index-box>
                         </div>
                         <div class="flex-auto ">
-                            <div class="bg-black border-red-600 dark:bg-gray-800 bg-opacity-95 border-opacity-60 | p-1 border-solid rounded-3xl border-2 | flex justify-around cursor-pointer | hover:bg-red-400 dark:hover:bg-red-600 hover:border-transparent | transition-colors duration-500">
-                                <div class="flex flex-col justify-center">
-                                    <p class="text-base bg-blue">Nasdaq</p>
-                                    <p class="text-xs">13,470.99</p>
-                                    <p class="text-xs">-64.75(-0.48%)</p>
-                                </div>
-                            </div>
+                            <market-index-box name="Nasdaq"></market-index-box>
                         </div>
                     </div>
                     <!-- End of market indexes-->
                 </div>
             </div>
-            <script src="https://unpkg.com/vue@next"></script>
-            <script src="App.js" defer></script>
-            </body>
+        </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="App.js" defer></script>
+    </body>
 </html>
