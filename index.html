@@ -68,22 +68,31 @@
             <div class="flex">
                 <div class="w-2/3">
                     <div class="flex space-x-4 mx-auto px-4">
-                        <div class="flex-1 ">Portfolio Value</div>
-                        <div class="flex-1 ">Performance Today</div>
-                        <div class="flex-1 ">Overall Return</div>
+                        <div class="flex-1 ">
+                            <p>Port </P>
+                            <!-- First row of info boxes
+<portfolio-info-box name="Performance Today"></portfolio-info-box>-->
+                        </div>
+                        <div class="flex-1 ">
+                            <portfolio-info-box name="Overall Return"></portfolio-info-box>
+                        </div>
+                        <div class="flex-1 ">
+                            <!--
+                            <portfolio-info-box name="Portfolio Value"></portfolio-info-box>-->
+                        </div>
                     </div>
                 </div>
                 <div class="w-1/3 bg-black">
                     <!-- Start of market indexes-->
                     <div class="flex flex-nowrap space-x-4 px-4 ">
                         <div class="flex-auto ">
-                            <market-index-box name="S&P 500"></market-index-box>
+                            <market-index-box name="S&P 500" stockSymbol="%5EGSPC"></market-index-box>
                         </div>
                         <div class="flex-auto ">
-                            <market-index-box name="Dow 30"></market-index-box>
+                            <market-index-box name="Dow 30" stockSymbol="%5EDJI"></market-index-box>
                         </div>
                         <div class="flex-auto ">
-                            <market-index-box name="Nasdaq"></market-index-box>
+                            <market-index-box name="Nasdaq" stockSymbol="%5EIXI"></market-index-box>
                         </div>
                     </div>
                     <!-- End of market indexes-->

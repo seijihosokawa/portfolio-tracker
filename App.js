@@ -2,34 +2,40 @@ const App = Vue.createApp({
     data(){
         
         return {
-            name: ''
+            name: '',
         }
     }
 })
 
 App.component('market-index-box', {
-    props: ['name'],
-    template: '<div class="bg-black border-red-600 dark:bg-gray-800 bg-opacity-95 border-opacity-60 | p-1 border-solid rounded-3xl border-2 | flex justify-around cursor-pointer | hover:bg-red-400 dark:hover:bg-red-600 hover:border-transparent | transition-colors duration-500"><div class="flex flex-col justify-center"><p class="text-base">{{ name }}</p><p class="text-xs">{{ getIndexPrice(name) }}</p><p class="text-xs">-3.26(-0.08%)</p></div></div>',
+    props: ['name', 'stockSymbol'],
+    template: '<div class="bg-black border-red-600 border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex justify-around cursor-pointer | hover:bg-red-600 hover:border-transparent | transition-colors duration-500"><div class="flex flex-col justify-center"><p class="text-base">{{ name }}</p><p class="text-xs">{{ getIndexPrice(stockSymbol) }}</p><p class="text-xs">-3.26(-0.08%)</p></div></div>',
     methods:{
-        async getIndexPrice(symbol){
-            let price = await getMarketPrice(symbol);
+        async getIndexPrice(stockSymbol){
+            let price = await getMarketPrice(stockSymbol);
             console.log(price);
             return price;
+        }
     }
-}
+})
+
+App.component('portfolio-info-box', {
+    props: ['name'],
+    template: '<div class="bg-black border-white-600 border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex justify-around cursor-pointer | hover:bg-red-600 hover:border-transparent | transition-colors duration-500"><div class="flex flex-col justify-center"><p class="text-base">${{ overallReturn(name) }}</p><p class="text-xs">{{ name }}</p><p class="text-xs">-3.26(-0.08%)</p></div></div>',
+    methods:{
+        overallReturn(name){
+            if(name === 'Overall Return')return 3000;
+            return 5000;
+        }
+    }
 })
 
 App.mount('#App')
 
-//%5EGSPC
-//%5EDJI
-//%5EIXI
 
-
-async function getMarketPrice(stockSymbol){
-    let indexMap = new Map([['S&P 500', '%5EGSPC'],['Dow 30', '%5EDJI'],['Nasdaq','%5EIXI']]);
-    let apiStockSymbol = indexMap.get(stockSymbol);
+async function getMarketPrice(apiStockSymbol){
     let url = "https://apidojo-yahoo-finance-v1.p.rapidapi.com/stock/v2/get-summary?symbol="+apiStockSymbol+"&region=US";
+    return apiStockSymbol;
     
     fetch(url, {
         "method": "GET",
