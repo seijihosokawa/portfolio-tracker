@@ -13,14 +13,18 @@ App.component('market-index-box', {
     data(){
         return{
             price: Number,
+            dayChange: Number,
+            dayPercentChange: Number,
         }
     },
-    template: '<div class="bg-black border-red-600 border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex justify-around cursor-pointer | hover:bg-red-600 hover:border-transparent | transition-colors duration-500"><div class="flex flex-col justify-center"><p class="text-base">{{ name }}</p><p class="text-xs">{{ price }}</p><p class="text-xs">-3.26(-0.08%)</p></div></div>',
+    template: '<div class="bg-black border-red-600 border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex justify-around cursor-pointer | hover:bg-red-600 hover:border-transparent | transition-colors duration-500"><div class="flex flex-col justify-center"><p class="text-base">{{ name }}</p><p class="text-xs">{{ price }}</p><p class="text-xs">{{ dayChange }}({{ dayPercentChange }})</p></div></div>',
     methods:{
         async getIndexPrice(stockSymbol){
             try {
-                var price = await getMarketPrice(stockSymbol);
-                this.price = price;
+                var data = await getMarketPrice(stockSymbol);
+                this.price = data["price"]["regularMarketPrice"]["fmt"];
+                this.dayChange = data["price"]["regularMarketChange"]["fmt"];
+                this.dayPercentChange = data["price"]["regularMarketChangePercent"]["fmt"];
             } catch(error){
                 console.log(error);
                 return 'error loading';
@@ -59,8 +63,8 @@ function getMarketPrice(apiStockSymbol){
         })
         .then((response) => response.json())
         .then((data) => {
-            //console.log(data);
-            resolve(data["price"]["regularMarketPrice"]["fmt"]);
+            console.log(data);
+            resolve(data);
         });
     })
 }
