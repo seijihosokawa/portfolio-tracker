@@ -15,16 +15,18 @@ App.component('market-index-box', {
             price: Number,
             dayChange: Number,
             dayPercentChange: Number,
+            positive: Boolean,
         }
     },
-    template: '<div class="bg-black border-red-600 border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex justify-around cursor-pointer | hover:bg-red-600 hover:border-transparent | transition-colors duration-500"><div class="flex flex-col justify-center"><p class="text-base">{{ name }}</p><p class="text-xs">{{ price }}</p><p class="text-xs">{{ dayChange }}({{ dayPercentChange }})</p></div></div>',
+    template: '<div class="bg-black {{ postitive ? border-green-400 : border-red-600 }} border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex justify-around cursor-pointer | {{ postitive ? hover:bg-green-400 : hover:bg-red-600 }} hover:border-transparent | transition-colors duration-500"><div class="flex flex-col justify-center"><p class="text-base">{{ name }}</p><p class="text-xs">{{ price }}</p><p class="text-xs">{{ dayChange }}({{ dayPercentChange }})</p></div></div>',
     methods:{
         async getIndexPrice(stockSymbol){
             try {
-                var data = await getMarketPrice(stockSymbol);
-                this.price = data["price"]["regularMarketPrice"]["fmt"];
-                this.dayChange = data["price"]["regularMarketChange"]["fmt"];
-                this.dayPercentChange = data["price"]["regularMarketChangePercent"]["fmt"];
+                //var data = await getMarketPrice(stockSymbol);
+                this.price = 100;//data["price"]["regularMarketPrice"]["fmt"];
+                this.dayChange = -200;//data["price"]["regularMarketChange"]["fmt"];
+                this.dayPercentChange = 3;//data["price"]["regularMarketChangePercent"]["fmt"];
+                this.positive = (this.dayChange >= 0) ? true : false;
             } catch(error){
                 console.log(error);
                 return 'error loading';
