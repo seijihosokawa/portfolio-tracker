@@ -1,9 +1,8 @@
 const App = Vue.createApp({
     data(){
         return {
-            temp: true,
         }
-    },
+    }
 })
 
 App.component('market-index-box', {
@@ -16,7 +15,7 @@ App.component('market-index-box', {
             positive: Boolean,
         }
     },
-    template: `<div class="bg-black border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex justify-around cursor-pointer | hover:border-transparent | transition-colors duration-500" :class="{ 'hover:bg-green-400': positive, 'border-green-400': positive, 'hover:bg-red-600': !positive, 'border-red-600': !positive }"><div class="flex flex-col justify-center"><p class="text-base">{{ name }}</p><p class="text-xs">{{ price }}</p><p class="text-xs">{{ dayChange }}({{ dayPercentChange }})</p></div></div>`,
+    template: `<div class="bg-black border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex justify-around cursor-pointer | hover:border-transparent | transition-colors duration-500" :class="{ 'hover:bg-green-400': positive, 'border-green-400': positive, 'hover:bg-red-600': !positive, 'border-red-600': !positive }"><div class="flex flex-col justify-center"><p class="text-base">{{ name }}</p><p class="text-xs">{{ price.toLocaleString() }}</p><p class="text-xs">{{ dayChange.toLocaleString() }}({{ dayPercentChange }})</p></div></div>`,
     methods:{
         async getIndexPrice(stockSymbol){
             try {
@@ -25,7 +24,6 @@ App.component('market-index-box', {
                 this.dayChange = -200;//data["price"]["regularMarketChange"]["fmt"];
                 this.dayPercentChange = 3;//data["price"]["regularMarketChangePercent"]["fmt"];
                 this.positive = (this.dayChange >= 0) ? true : false;
-                console.log(this.positive)
             } catch(error){
                 console.log(error);
                 return 'error loading';
@@ -39,12 +37,30 @@ App.component('market-index-box', {
 
 App.component('portfolio-info-box', {
     props: ['name'],
-    template: '<div class="bg-black border-white-600 border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex justify-around cursor-pointer | hover:bg-red-600 hover:border-transparent | transition-colors duration-500"><div class="flex flex-col justify-center"><p class="text-base">${{ overallReturn(name) }}</p><p class="text-xs">{{ name }}</p><p class="text-xs">-3.26(-0.08%)</p></div></div>',
-    methods:{
-        overallReturn(name){
-            if(name === 'Overall Return')return 3000;
-            return 5000;
+    data(){
+        return{
+            overallReturn: Number,
+            dayChange: Number,
+            dayPercentChange: Number,
+            positive: Boolean,
         }
+    },
+    template: `<div class="bg-black border-white-600 border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex cursor-pointer | hover:bg-red-600 hover:border-transparent | transition-colors duration-500" :class="{ 'hover:bg-green-400': positive, 'border-green-400': positive, 'hover:bg-red-600': !positive, 'border-red-600': !positive }"><div class="flex flex-col"><p class="text-base float-left">\${{ overallReturn.toLocaleString() }}</p><p class=" float-right text-xs">{{ name }}</p><p class="text-xs">-3.26(-0.08%)</p></div></div>`,
+    methods:{
+        getOverallReturn(){
+            try {
+                this.overallReturn = 5000;
+                this.dayChange = 200;
+                this.dayPercentChange = 3;
+                this.positive = (this.dayChange >= 0) ? true : false;
+            } catch(error){
+                console.log(error);
+                return 'error loading';
+            }
+        }
+    },
+    created(){
+        this.getOverallReturn();
     }
 })
 
