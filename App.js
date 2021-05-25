@@ -1,9 +1,7 @@
 const App = Vue.createApp({
     data(){
-        
         return {
-            name: '',
-            stockSymbol: '',
+            temp: true,
         }
     },
 })
@@ -18,7 +16,7 @@ App.component('market-index-box', {
             positive: Boolean,
         }
     },
-    template: '<div class="bg-black {{ postitive ? border-green-400 : border-red-600 }} border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex justify-around cursor-pointer | {{ postitive ? hover:bg-green-400 : hover:bg-red-600 }} hover:border-transparent | transition-colors duration-500"><div class="flex flex-col justify-center"><p class="text-base">{{ name }}</p><p class="text-xs">{{ price }}</p><p class="text-xs">{{ dayChange }}({{ dayPercentChange }})</p></div></div>',
+    template: `<div class="bg-black border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex justify-around cursor-pointer | hover:border-transparent | transition-colors duration-500" :class="{ 'hover:bg-green-400': positive, 'border-green-400': positive, 'hover:bg-red-600': !positive, 'border-red-600': !positive }"><div class="flex flex-col justify-center"><p class="text-base">{{ name }}</p><p class="text-xs">{{ price }}</p><p class="text-xs">{{ dayChange }}({{ dayPercentChange }})</p></div></div>`,
     methods:{
         async getIndexPrice(stockSymbol){
             try {
@@ -27,6 +25,7 @@ App.component('market-index-box', {
                 this.dayChange = -200;//data["price"]["regularMarketChange"]["fmt"];
                 this.dayPercentChange = 3;//data["price"]["regularMarketChangePercent"]["fmt"];
                 this.positive = (this.dayChange >= 0) ? true : false;
+                console.log(this.positive)
             } catch(error){
                 console.log(error);
                 return 'error loading';
