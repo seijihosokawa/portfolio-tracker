@@ -11,25 +11,21 @@
     <body>
         <nav>
             <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-                <div class="relative flex items-center justify-between h-16">
-                    <div class="flex-1 flex ">
-                        <div class="hidden sm:block sm:ml-6">
-                            <div class="flex space-x-4">
-                                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                                <a href="https://finance.yahoo.com/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Yahoo Finance</a>
-                                <a href="https://finviz.com/map.ashx" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Finviz Heat Map</a>
-                                <a href="https://www.fidelity.com/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Fidelity</a>
-                                <button @click="refresh" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Refresh</button>
-                                <button class="justify-end                   hover:bg-gray-700 px-3 py-2 rounded-md  ">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
+                <div class="relative flex items-center justify-between h-16 space-x-4">
+                    
+                    <a href="https://finance.yahoo.com/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Yahoo Finance</a>
+                    <a href="https://finviz.com/map.ashx" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Finviz Heat Map</a>
+                    <a href="https://www.fidelity.com/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Fidelity</a>
+                    <button @click="refresh" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Refresh</button>
+                    <div class="image-upload hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md">
+                      <label for="file-input">
+                          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer " fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                      </label>
+                      <input id="file-input" type="file" accept=".csv"/>
                     </div>
                 </div>
-            </div>            
+            </div>
         </nav>
         <div id="App" class="App">
             <!-- First row of info boxes-->
@@ -63,8 +59,11 @@
                     <!-- End of market indexes-->
                 </div>
             </div>
+            <!-- End first row of info boxes-->
+            <!-- Start of csv table-->
         </div>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="App.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-csv-loader"></script>
     </body>
 </html>
