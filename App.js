@@ -45,7 +45,7 @@ App.component('portfolio-info-box', {
             positive: Boolean,
         }
     },
-    template: `<div class="bg-black border-white-600 border-opacity-60 | p-1 border-solid rounded-2xl border-2 | flex cursor-pointer | hover:bg-red-600 hover:border-transparent | transition-colors duration-500" :class="{ 'hover:bg-green-400': positive, 'border-green-400': positive, 'hover:bg-red-600': !positive, 'border-red-600': !positive }"><div class="flex flex-col"><p class="text-base float-left">\${{ overallReturn.toLocaleString() }}</p><p class=" float-right text-xs">{{ name }}</p><p class="text-xs">-3.26(-0.08%)</p></div></div>`,
+    template: `<div class="bg-black border-white-600 border-opacity-60 | p-1 border-solid rounded-2xl border-2 | cursor-pointer | hover:bg-red-600 hover:border-transparent | transition-colors duration-500" :class="{ 'hover:bg-green-400': positive, 'border-green-400': positive, 'hover:bg-red-600': !positive, 'border-red-600': !positive }"><div class="grid grid-rows-2 grid-flow-col gap-2 content-center"><div class="flex self-top row-span-1 text-xs italic">{{ name }}</div><div class="flex justify-center row-span-1 text-base">\${{ overallReturn.toLocaleString() }}</div><div class="flex justify-center self-center row-span-2 text-2xl items-end">+40.4%</div></div></div>`,
     methods:{
         getOverallReturn(){
             try {
